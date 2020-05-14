@@ -1,0 +1,23 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "default",
+            "isSubtle": true,
+            "wrap": true,
+            "maxLines": 0,
+            "text": "{areaValue}",
+            "horizontalAlignment": "Center"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Click To Area",
+            "url": "{areaLink}"
+        }
+    ]
+}

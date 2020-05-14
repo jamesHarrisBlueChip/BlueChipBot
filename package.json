@@ -21,7 +21,9 @@
         "botbuilder-ai": "~4.8.0",
         "botbuilder-dialogs": "~4.8.0",
         "dotenv": "^8.2.0",
-        "restify": "~8.4.0"
+        "restify": "~8.4.0",
+        "adaptivecards": "^1.2.5",
+        "adaptivecards-templating": "^0.1.1-alpha.1"
     },
     "devDependencies": {
         "eslint": "^6.6.0",

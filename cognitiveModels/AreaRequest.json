@@ -1,0 +1,377 @@
+{
+  "luis_schema_version": "7.0.0",
+  "intents": [
+    {
+      "name": "AreaRequest",
+      "features": [
+        {
+          "modelName": "TimeEntry",
+          "isRequired": false
+        }
+      ]
+    },
+    {
+      "name": "Cancel",
+      "features": []
+    },
+    {
+      "name": "GetWeather",
+      "features": []
+    },
+    {
+      "name": "None",
+      "features": []
+    }
+  ],
+  "entities": [
+    {
+      "name": "TimeEntry",
+      "children": [],
+      "roles": [],
+      "features": [
+        {
+          "featureName": "TimeEntry",
+          "isRequired": false
+        }
+      ]
+    }
+  ],
+  "hierarchicals": [],
+  "composites": [],
+  "closedLists": [],
+  "prebuiltEntities": [],
+  "utterances": [
+    {
+      "text": "add location to favorites",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "blue mind",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "bluemind",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "book a hotel in new york",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "book a restaurant",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "bye",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "cancel booking",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "display map for sacramento plastic surgery",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "distance between my home to tesco",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "exit",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "find an airport near me",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "health equity",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "how far am i from fifty first avenue and indian school",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far away from school am i",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far i am from my work place",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it from here to home",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it from here to work",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it from home to new haven missouri",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it to from here",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it to mum and dad s house",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is it to street",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is mcdonalds from my home",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is rite aid from acme",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far is the home depot from lowe s",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how far to mom and dad's",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hsa",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "i'd like to rent a car",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "ignore",
+      "intent": "Cancel",
+      "entities": []
+    },
+    {
+      "text": "let's rate microsoft visitor center 5 stars on google map",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "linkedin learning",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "microsoft learn",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "mind share",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "mindshare",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "operations",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "operations dashboard",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "pay",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "pay checks",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "pay city",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "paylocity",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "save my location on map",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "save my location to my map",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "spring ahead",
+      "intent": "AreaRequest",
+      "entities": [
+        {
+          "entity": "TimeEntry",
+          "startPos": 0,
+          "endPos": 11,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "springahead",
+      "intent": "AreaRequest",
+      "entities": [
+        {
+          "entity": "TimeEntry",
+          "startPos": 0,
+          "endPos": 10,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "the address and how to get there",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "the address i want the address",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "time",
+      "intent": "AreaRequest",
+      "entities": [
+        {
+          "entity": "TimeEntry",
+          "startPos": 0,
+          "endPos": 3,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "time entry",
+      "intent": "AreaRequest",
+      "entities": [
+        {
+          "entity": "TimeEntry",
+          "startPos": 0,
+          "endPos": 9,
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "travel booking",
+      "intent": "AreaRequest",
+      "entities": []
+    },
+    {
+      "text": "what is the address for my bus stop",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is the distance between my current location and",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what's the forecast for this friday?",
+      "intent": "GetWeather",
+      "entities": []
+    },
+    {
+      "text": "what's the weather like for tomorrow",
+      "intent": "GetWeather",
+      "entities": []
+    },
+    {
+      "text": "what's the weather like in new york",
+      "intent": "GetWeather",
+      "entities": []
+    },
+    {
+      "text": "what's the weather like?",
+      "intent": "GetWeather",
+      "entities": []
+    },
+    {
+      "text": "where is bus stop 77",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "where is my home address",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "winter is coming",
+      "intent": "None",
+      "entities": []
+    }
+  ],
+  "versionId": "0.1",
+  "name": "JamesHarrisBlueChipBot-9bdf",
+  "desc": "Luis Model for CoreBot",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "phraselists": [
+    {
+      "name": "TimeEntry",
+      "mode": true,
+      "words": "Time,TimeEntry,Time Entry,SpingAhead,Spring Ahead",
+      "activated": true,
+      "enabledForAllModels": false
+    }
+  ],
+  "regex_features": [],
+  "patterns": [],
+  "settings": []
+}

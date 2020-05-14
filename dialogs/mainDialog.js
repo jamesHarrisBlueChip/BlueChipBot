@@ -9,18 +9,17 @@ const { ComponentDialog, DialogSet, DialogTurnStatus, TextPrompt, WaterfallDialo
 const MAIN_WATERFALL_DIALOG = 'mainWaterfallDialog';
 
 class MainDialog extends ComponentDialog {
-    constructor(luisRecognizer, bookingDialog) {
+    constructor(luisRecognizer, areaDialog) {
         super('MainDialog');
 
         if (!luisRecognizer) throw new Error('[MainDialog]: Missing parameter \'luisRecognizer\' is required');
         this.luisRecognizer = luisRecognizer;
 
-        if (!bookingDialog) throw new Error('[MainDialog]: Missing parameter \'bookingDialog\' is required');
+        if (!areaDialog) throw new Error('[MainDialog]: Missing parameter \'areaDialog\' is required');
 
         // Define the main dialog and its related components.
-        // This is a sample "book a flight" dialog.
         this.addDialog(new TextPrompt('TextPrompt'))
-            .addDialog(bookingDialog)
+            .addDialog(areaDialog)
             .addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
                 this.introStep.bind(this),
                 this.actStep.bind(this),
@@ -59,54 +58,51 @@ class MainDialog extends ComponentDialog {
             return await stepContext.next();
         }
 
-        const messageText = stepContext.options.restartMsg ? stepContext.options.restartMsg : 'What can I help you with today?\nSay something like "Book a flight from Paris to Berlin on March 22, 2020"';
+        const messageText = stepContext.options.restartMsg ? stepContext.options.restartMsg : 'What can I help you with today?\nSay something like "Employee Bios"';
         const promptMessage = MessageFactory.text(messageText, messageText, InputHints.ExpectingInput);
         return await stepContext.prompt('TextPrompt', { prompt: promptMessage });
     }
 
     /**
-     * Second step in the waterfall.  This will use LUIS to attempt to extract the origin, destination and travel dates.
-     * Then, it hands off to the bookingDialog child dialog to collect any remaining details.
+     * Second step in the waterfall.  This will use LUIS to attempt to extract the area.
      */
     async actStep(stepContext) {
-        const bookingDetails = {};
+        const areaDetails = {};
 
         if (!this.luisRecognizer.isConfigured) {
-            // LUIS is not configured, we just run the BookingDialog path.
-            return await stepContext.beginDialog('bookingDialog', bookingDetails);
+            // LUIS is not configured
+            const messageText = 'LUIS AI Engine is not configured.';
+            const promptMessage = MessageFactory.text(messageText, messageText, InputHints.ExpectingInput);
+            return await stepContext.prompt('TextPrompt', { prompt: promptMessage });  
         }
 
         // Call LUIS and gather any potential booking details. (Note the TurnContext has the response to the prompt)
         const luisResult = await this.luisRecognizer.executeLuisQuery(stepContext.context);
         switch (LuisRecognizer.topIntent(luisResult)) {
-        case 'BookFlight': {
+        case 'AreaRequest': {
             // Extract the values for the composite entities from the LUIS result.
-            const fromEntities = this.luisRecognizer.getFromEntities(luisResult);
-            const toEntities = this.luisRecognizer.getToEntities(luisResult);
-
-            // Show a warning for Origin and Destination if we can't resolve them.
-            await this.showWarningForUnsupportedCities(stepContext.context, fromEntities, toEntities);
-
-            // Initialize BookingDetails with any entities we may have found in the response.
-            bookingDetails.destination = toEntities.airport;
-            bookingDetails.origin = fromEntities.airport;
-            bookingDetails.travelDate = this.luisRecognizer.getTravelDate(luisResult);
-            console.log('LUIS extracted these booking details:', JSON.stringify(bookingDetails));
-
-            // Run the BookingDialog passing in whatever details we have from the LUIS call, it will fill out the remainder.
-            return await stepContext.beginDialog('bookingDialog', bookingDetails);
+            const areaData = this.luisRecognizer.getAreaLink(luisResult);
+            // Show a warning if we can't resolve them.
+            await this.showWarningForUnsupportedArea(stepContext.context, areaData);
+            if( areaData !== undefined && areaData.areaValue !== undefined && areaData.areaValue !== null )
+            {
+                console.log('LUIS extracted this area details:', JSON.stringify(areaData));
+                // Run the AreaDialog passing in whatever details we have from the LUIS call, it will fill out the remainder.
+                return await stepContext.beginDialog('areaDialog', areaData); 
+            }
         }
 
-        case 'GetWeather': {
-            // We haven't implemented the GetWeatherDialog so we just display a TODO message.
-            const getWeatherMessageText = 'TODO: get weather flow here';
-            await stepContext.context.sendActivity(getWeatherMessageText, getWeatherMessageText, InputHints.IgnoringInput);
-            break;
-        }
+        // case 'GetWeather': {
+        //     // We haven't implemented the GetWeatherDialog so we just display a TODO message.
+        //     const getWeatherMessageText = 'TODO: get weather flow here';
+        //     await stepContext.context.sendActivity(getWeatherMessageText, getWeatherMessageText, InputHints.IgnoringInput);
+        //     break;
+        // }
 
         default: {
             // Catch all for unhandled intents
-            const didntUnderstandMessageText = `Sorry, I didn't get that. Please try asking in a different way (intent was ${ LuisRecognizer.topIntent(luisResult) })`;
+            //const didntUnderstandMessageText = `Sorry, I didn't get that. Please try asking in a different way (intent was ${ LuisRecognizer.topIntent(luisResult) })`;
+            const didntUnderstandMessageText = `Sorry, I didn't get that. Please try asking in a different way.`;
             await stepContext.context.sendActivity(didntUnderstandMessageText, didntUnderstandMessageText, InputHints.IgnoringInput);
         }
         }
@@ -115,22 +111,13 @@ class MainDialog extends ComponentDialog {
     }
 
     /**
-     * Shows a warning if the requested From or To cities are recognized as entities but they are not in the Airport entity list.
-     * In some cases LUIS will recognize the From and To composite entities as a valid cities but the From and To Airport values
-     * will be empty if those entity values can't be mapped to a canonical item in the Airport.
+     * Shows a warning if the requested Area is recognized as entities but they are not in the AREA entity list.
+     * In some cases LUIS will recognize the AREA entities as a valid AREA but the AREA values
+     * will be empty if those entity values can't be mapped to a canonical item in the Area.
      */
-    async showWarningForUnsupportedCities(context, fromEntities, toEntities) {
-        const unsupportedCities = [];
-        if (fromEntities.from && !fromEntities.airport) {
-            unsupportedCities.push(fromEntities.from);
-        }
-
-        if (toEntities.to && !toEntities.airport) {
-            unsupportedCities.push(toEntities.to);
-        }
-
-        if (unsupportedCities.length) {
-            const messageText = `Sorry but the following airports are not supported: ${ unsupportedCities.join(', ') }`;
+    async showWarningForUnsupportedArea(context, areaData) {
+        if (areaData === null || areaData === undefined || areaData.areaValue === null ) {
+            const messageText = `Sorry but the requested area is not supported`;
             await context.sendActivity(messageText, messageText, InputHints.IgnoringInput);
         }
     }

@@ -1,0 +1,23 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "TextBlock",
+            "size": "default",
+            "isSubtle": true,
+            "wrap": true,
+            "maxLines": 0,
+            "text": "time",
+            "horizontalAlignment": "Center"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Click for Area",
+            "url": "https://my.springahead.com/go/Account/LogOn"
+        }
+    ]
+}

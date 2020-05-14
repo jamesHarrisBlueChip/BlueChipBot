@@ -1,46 +1,48 @@
 {
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "type": "AdaptiveCard",
-  "version": "1.0",
+  "version": "1.2",
   "body": [
-    {
-      "type": "Image",
-      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtB3AwMUeNoq4gUBGe6Ocj8kyh3bXa9ZbV7u1fVKQoyKFHdkqU",
-      "size": "stretch"
-    },
-    {
-      "type": "TextBlock",
-      "spacing": "medium",
-      "size": "default",
-      "weight": "bolder",
-      "text": "James Harris Blue Bot",
-      "wrap": true,
-      "maxLines": 0
-    },
-    {
-      "type": "TextBlock",
-      "size": "default",
-      "isSubtle": true,
-      "text": "Now that you have successfully run your bot, follow the links in this Adaptive Card to expand your knowledge of Bot Framework.",
-      "wrap": true,
-      "maxLines": 0
-    }
+      {
+          "type": "Image",
+          "size": "Stretch",
+          "url": "https://sk7acj53bu2lsstandardsa.blob.core.windows.net/media/images/BC_logo_white_tm.svg",
+          "backgroundColor": "#0328fc"
+      },
+      {
+          "type": "TextBlock",
+          "spacing": "Medium",
+          "size": "default",
+          "weight": "Bolder",
+          "text": "Blue Chip Bot",
+          "wrap": true,
+          "maxLines": 0
+      },
+      {
+          "type": "TextBlock",
+          "size": "default",
+          "isSubtle": true,
+          "wrap": true,
+          "maxLines": 0,
+          "text": "Quick Links",
+          "horizontalAlignment": "Center"
+      }
   ],
   "actions": [
-    {
-      "type": "Action.OpenUrl",
-      "title": "Get an overview",
-      "url": "https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0"
-    },
-    {
-      "type": "Action.OpenUrl",
-      "title": "Ask a question",
-      "url": "https://stackoverflow.com/questions/tagged/botframework"
-    },
-    {
-      "type": "Action.OpenUrl",
-      "title": "Learn how to deploy",
-      "url": "https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-deploy-azure?view=azure-bot-service-4.0"
-    }
+      {
+          "type": "Action.OpenUrl",
+          "title": "Time Entry",
+          "url": "https://my.springahead.com/go/Account/LogOn"
+      },
+      {
+          "type": "Action.OpenUrl",
+          "title": "Expense Entry",
+          "url": "https://www.concursolutions.com/UI/SSO/p0084560m3nw"
+      },
+      {
+          "type": "Action.OpenUrl",
+          "title": "Yammer",
+          "url": "https://www.yammer.com/bluechip-llc.com/#/threads/inGroup?type=in_group&feedId=14015865"
+      }
   ]
 }
